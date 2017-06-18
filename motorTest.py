@@ -26,32 +26,37 @@ def RunForward(speed):
     run = True
     ct = dt.now()
     while run:
+        if ((dt.now()-ct).total_seconds() > 1):
+            run = False
         LightLED(33, 1)
         LightLED(35, 1)
         time.sleep(speed)
         LightLED(33, 0)
         LightLED(35, 0)
-        if ((ct-dt.now()).total_seconds() > 0.5):
-            run = False
+        time.sleep(speed)
+
 
 def RunBackward(speed):
     run = True
     ct = dt.now()
     while run:
+        if ((dt.now()-ct).total_seconds() > 1):
+            run = False
         LightLED(31, 1)
         LightLED(37, 1)
         time.sleep(speed)
         LightLED(31, 0)
         LightLED(37, 0)
-        if ((ct-dt.now()).total_seconds() > 0.5):
-            run = False
+        time.sleep(speed)
+
 
 
 TurnOff()
      
 print "Spreman!"
 try:
-    RunForward(0.1)    
+    RunForward(0.001)
+    RunBackward(0.001)  
     GPIO.cleanup()
     
 except KeyboardInterrupt:
