@@ -22,30 +22,36 @@ def TurnOff():
     GPIO.output(35,False)
     GPIO.output(37,False)
 
+def RunForward(speed):
+    run = True
+    ct = dt.now()
+    while run:
+        LightLED(33, 1)
+        LightLED(35, 1)
+        time.sleep(speed)
+        LightLED(33, 0)
+        LightLED(35, 0)
+        if ((ct-dt.now()).total_seconds() > 0.5):
+            run = False
+
+def RunBackward(speed):
+    run = True
+    ct = dt.now()
+    while run:
+        LightLED(31, 1)
+        LightLED(37, 1)
+        time.sleep(speed)
+        LightLED(31, 0)
+        LightLED(37, 0)
+        if ((ct-dt.now()).total_seconds() > 0.5):
+            run = False
+
+
 TurnOff()
      
 print "Spreman!"
 try:
-    print "F1"
-    LightLED(33, 1)
-    print "F3"
-    LightLED(35, 1)
-
-    time.sleep(0.5)
-    LightLED(35, 0)
-
-    LightLED(33, 0)
-
-    print "F2"
-    LightLED(31, 1)
-    
-    print "F4"
-    LightLED(37, 1)
-
-    time.sleep(0.5)
-    LightLED(37, 0)
-    LightLED(31, 0)
-    
+    RunForward(0.1)    
     GPIO.cleanup()
     
 except KeyboardInterrupt:
