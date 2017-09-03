@@ -1,4 +1,11 @@
-import RPi.GPIO as GPIO 
+import logging
+import RPi.GPIO as GPIO
+logger = logging.getLogger('myapp')
+hdlr = logging.FileHandler('/home/pi/logs/startup.log')
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+hdlr.setFormatter(formatter)
+logger.addHandler(hdlr) 
+logger.setLevel(logging.INFO)
 
 
 GPIO.setmode(GPIO.BOARD) 
@@ -9,4 +16,5 @@ GPIO.setup(37, GPIO.OUT)
 
 GPIO.cleanup()
 
+logger.info('Masina se rebutala i resetirala GPIO')
 
