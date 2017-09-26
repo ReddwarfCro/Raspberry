@@ -76,10 +76,10 @@ while True:
         print("Nazad")
 
     if(char == "a"):
-    #    toggleSteering("left")
+        #toggleSteering("left")
 
     if(char == "d"):
-    #    toggleSteering("right")
+        #toggleSteering("right")
 
     if(char == "x"):
         print("Kraj")
