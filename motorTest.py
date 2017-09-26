@@ -75,10 +75,10 @@ while True:
         #RunBackward(0.0001)  
         print("Nazad")
 
-    if(char == "a"):
+    #if(char == "a"):
         #toggleSteering("left")
 
-    if(char == "d"):
+    #if(char == "d"):
         #toggleSteering("right")
 
     if(char == "x"):
