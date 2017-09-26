@@ -55,8 +55,8 @@ TurnOff()
      
 print "Spreman!"
 try:
-    RunForward(0.001)
-    RunBackward(0.001)  
+    RunForward(0.0001)
+    RunBackward(0.0001)  
     GPIO.cleanup()
     
 except KeyboardInterrupt:
