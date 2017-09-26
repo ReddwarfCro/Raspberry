@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO 
 from datetime import datetime as dt
-import time
+io.setmode(io.BCM)
+import sys, tty, termios, time
 
 GPIO.setmode(GPIO.BOARD) 
 GPIO.setup(31, GPIO.OUT)
@@ -12,6 +13,17 @@ initial = True
 state = False
 starttime = dt.now()
 pressed = False
+
+
+def getch():
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(sys.stdin.fileno())
+        ch = sys.stdin.read(1)
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    return ch
 
 def LightLED(LedId, state):
     GPIO.output(LedId, state)
@@ -49,14 +61,35 @@ def RunBackward(speed):
         LightLED(37, 0)
         time.sleep(speed)
 
-
-
 TurnOff()
+
+print "Spreman!"
+
+while True:
+    char = getch()
+    if(char == "w"):
+        #RunForward(0.0001)
+        print("Naprijed")
+
+    if(char == "s"):
+        #RunBackward(0.0001)  
+        print("Nazad")
+
+    if(char == "a"):
+    #    toggleSteering("left")
+
+    if(char == "d"):
+    #    toggleSteering("right")
+
+    if(char == "x"):
+        print("Kraj")
+        break
+
      
 print "Spreman!"
 try:
-    RunForward(0.0001)
-    RunBackward(0.0001)  
+    #RunForward(0.0001)
+    #RunBackward(0.0001)  
     GPIO.cleanup()
     
 except KeyboardInterrupt:
