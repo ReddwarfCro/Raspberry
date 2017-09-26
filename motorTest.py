@@ -101,16 +101,16 @@ print "Spreman!"
 while True:
     char = getch()
     if(char == "w"):
-        RunForward(0.0001)
+        RunForward(0.001)
 
     if(char == "s"):
-        RunBackward(0.0001)  
+        RunBackward(0.001)  
 
     if(char == "a"):
-        RunRight(0.0001)
+        RunRight(0.001)
 
     if(char == "d"):
-        RunLeft(0.0001)
+        RunLeft(0.001)
 
     if(char == "x"):
         print("Kraj")
