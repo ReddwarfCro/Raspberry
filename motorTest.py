@@ -37,8 +37,8 @@ def RunForward(speed):
     run = True
     ct = dt.now()
     while run:
-        #if ((dt.now()-ct).total_seconds() > 1):
-        #    run = False
+        if ((dt.now()-ct).total_seconds() > 0.1):
+            run = False
         LightLED(33, 1)
         LightLED(35, 1)
         time.sleep(speed)
@@ -50,8 +50,8 @@ def RunRight(speed):
     run = True
     ct = dt.now()
     while run:
-        #if ((dt.now()-ct).total_seconds() > 1):
-        #    run = False
+        if ((dt.now()-ct).total_seconds() > 0.1):
+            run = False
         LightLED(33, 1)
         time.sleep(speed)
         LightLED(33, 0)
@@ -61,8 +61,8 @@ def RunLeft(speed):
     run = True
     ct = dt.now()
     while run:
-        #if ((dt.now()-ct).total_seconds() > 1):
-        #    run = False
+        if ((dt.now()-ct).total_seconds() > 0.1):
+            run = False
         LightLED(35, 1)
         time.sleep(speed)
         LightLED(35, 0)
@@ -73,8 +73,8 @@ def RunBackward(speed):
     run = True
     ct = dt.now()
     while run:
-        #if ((dt.now()-ct).total_seconds() > 1):
-        #    run = False
+        if ((dt.now()-ct).total_seconds() > 0.1):
+            run = False
         LightLED(31, 1)
         LightLED(37, 1)
         time.sleep(speed)
