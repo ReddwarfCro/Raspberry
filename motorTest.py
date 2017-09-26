@@ -92,19 +92,19 @@ print "Spreman!"
 while True:
     char = getch()
     if(char == "w"):
-        print("naprijed")
+        #print("naprijed")
         RunForward(0.001)
 
     if(char == "s"):
-        print("nazad")
+        #print("nazad")
         RunBackward(0.001)  
 
     if(char == "a"):
-        print("lijevo")
+        #print("lijevo")
         RunRight(0.001)
 
     if(char == "d"):
-        print("desno")
+        #print("desno")
         RunLeft(0.001)
 
     if(char == "x"):
