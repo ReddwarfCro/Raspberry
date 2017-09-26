@@ -36,51 +36,63 @@ def TurnOff():
 def RunForward(speed):
     run = True
     ct = dt.now()
-    while run:
-        if ((dt.now()-ct).total_seconds() > 0.1):
-            run = False
-        LightLED(33, 1)
-        LightLED(35, 1)
-        time.sleep(speed)
-        LightLED(33, 0)
-        LightLED(35, 0)
-        time.sleep(speed)
+    #while run:
+        # char = getch()
+        # if(char != "w"):
+        #     run = False
+        # if ((dt.now()-ct).total_seconds() > 0.1):
+        #     run = False
+    LightLED(33, 1)
+    LightLED(35, 1)
+    time.sleep(speed)
+    LightLED(33, 0)
+    LightLED(35, 0)
+    time.sleep(speed)
 
 def RunRight(speed):
     run = True
     ct = dt.now()
-    while run:
-        if ((dt.now()-ct).total_seconds() > 0.1):
-            run = False
-        LightLED(33, 1)
-        time.sleep(speed)
-        LightLED(33, 0)
-        time.sleep(speed)
+    #while run:
+        # char = getch()
+        # if(char != "a"):
+        #     run = False
+        # if ((dt.now()-ct).total_seconds() > 0.1):
+        #     run = False
+    LightLED(33, 1)
+    time.sleep(speed)
+    LightLED(33, 0)
+    time.sleep(speed)
 
 def RunLeft(speed):
     run = True
     ct = dt.now()
-    while run:
-        if ((dt.now()-ct).total_seconds() > 0.1):
-            run = False
-        LightLED(35, 1)
-        time.sleep(speed)
-        LightLED(35, 0)
-        time.sleep(speed)
+    #while run:
+        # char = getch()
+        # if(char != "d"):
+        #     run = False
+        # if ((dt.now()-ct).total_seconds() > 0.1):
+        #     run = False
+    LightLED(35, 1)
+    time.sleep(speed)
+    LightLED(35, 0)
+    time.sleep(speed)
 
 
 def RunBackward(speed):
     run = True
     ct = dt.now()
-    while run:
-        if ((dt.now()-ct).total_seconds() > 0.1):
-            run = False
-        LightLED(31, 1)
-        LightLED(37, 1)
-        time.sleep(speed)
-        LightLED(31, 0)
-        LightLED(37, 0)
-        time.sleep(speed)
+    #while run:
+        # char = getch()
+        # if(char != "s"):
+        #     run = False
+        # if ((dt.now()-ct).total_seconds() > 0.1):
+        #     run = False
+    LightLED(31, 1)
+    LightLED(37, 1)
+    time.sleep(speed)
+    LightLED(31, 0)
+    LightLED(37, 0)
+    time.sleep(speed)
 
 TurnOff()
 
