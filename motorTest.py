@@ -36,64 +36,54 @@ def TurnOff():
 def RunForward(speed):
     run = True
     ct = dt.now()
-    #while run:
-        # char = getch()
-        # if(char != "w"):
-        #     run = False
-        # if ((dt.now()-ct).total_seconds() > 0.1):
-        #     run = False
-    LightLED(33, 1)
-    LightLED(35, 1)
-    time.sleep(speed)
-    LightLED(33, 0)
-    LightLED(35, 0)
-    time.sleep(speed)
+    while run:
+        char = getch()
+        LightLED(33, 1)
+        LightLED(35, 1)
+        if(char != "w" or (dt.now()-ct).total_seconds() > 0.1):
+            run = False
+            break
+        time.sleep(speed)
+        LightLED(33, 0)
+        LightLED(35, 0)
 
 def RunRight(speed):
     run = True
     ct = dt.now()
-    #while run:
-        # char = getch()
-        # if(char != "a"):
-        #     run = False
-        # if ((dt.now()-ct).total_seconds() > 0.1):
-        #     run = False
-    LightLED(33, 1)
-    time.sleep(speed)
-    LightLED(33, 0)
-    time.sleep(speed)
+    while run:
+        char = getch()
+        LightLED(33, 1)
+        if(char != "a" or (dt.now()-ct).total_seconds() > 0.1):
+            run = False
+            break
+        time.sleep(speed)
+        LightLED(33, 0)
 
 def RunLeft(speed):
     run = True
     ct = dt.now()
-    #while run:
-        # char = getch()
-        # if(char != "d"):
-        #     run = False
-        # if ((dt.now()-ct).total_seconds() > 0.1):
-        #     run = False
-    LightLED(35, 1)
-    time.sleep(speed)
-    LightLED(35, 0)
-    time.sleep(speed)
-
+    while run:
+        char = getch()
+        LightLED(35, 1)
+        if(char != "d" or (dt.now()-ct).total_seconds() > 0.1):
+            run = False
+            break
+        time.sleep(speed)
+        LightLED(35, 0)
 
 def RunBackward(speed):
     run = True
     ct = dt.now()
     while run:
-    	char = getch()
-        #if ((dt.now()-ct).total_seconds() > 0.1):
-        #    run = False
+        char = getch()
     	LightLED(31, 0)
     	LightLED(37, 0)
-	if(char != "s"):
-		run = False
-		break
+        if(char != "s" or (dt.now()-ct).total_seconds() > 0.1):
+            run = False
+            break
     	time.sleep(speed)
     	LightLED(31, 1)
     	LightLED(37, 1)
-    	
 
 TurnOff()
 
@@ -102,15 +92,19 @@ print "Spreman!"
 while True:
     char = getch()
     if(char == "w"):
+        print("naprijed")
         RunForward(0.001)
 
     if(char == "s"):
+        print("nazad")
         RunBackward(0.001)  
 
     if(char == "a"):
+        print("lijevo")
         RunRight(0.001)
 
     if(char == "d"):
+        print("desno")
         RunLeft(0.001)
 
     if(char == "x"):
