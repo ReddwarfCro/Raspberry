@@ -4,6 +4,7 @@ import requests
 import socket
 import fcntl
 import struct
+import time
 
 logger = logging.getLogger('myapp')
 hdlr = logging.FileHandler('/home/pi/logs/startup.log')
@@ -18,15 +19,15 @@ def get_ip_address(ifname):
 		struct.pack('256s', ifname[:15])
 	)[20:24])
 
-payload = {'name':str(get_ip_address('wlx3c3300213b66'))}
-
-url = 'http://vinkovicnodejs.herokuapp.com/api/ip'
-#payload = {'name':'test'}
-
-r = requests.post(url, json=payload)
-
-print(r.text)
-print(r.status_code)
+while True:
+    try:
+        logger.info(get_ip_address('wlx3c3300213b66'))
+        payload = {'name':str(get_ip_address('wlx3c3300213b66'))}
+        url = 'http://vinkovicnodejs.herokuapp.com/api/ip'
+        r = requests.post(url, json=payload)
+        break
+    except:
+        time.sleep(5)
 
 try:
     GPIO.setmode(GPIO.BOARD) 
