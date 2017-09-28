@@ -29,15 +29,17 @@ while True:
     except:
         time.sleep(5)
 
-try:
-    GPIO.setmode(GPIO.BOARD) 
-    GPIO.setup(31, GPIO.OUT)
-    GPIO.setup(33, GPIO.OUT)
-    GPIO.setup(35, GPIO.OUT)
-    GPIO.setup(37, GPIO.OUT)
-    GPIO.cleanup()
-except:
-    logger.error("E nesto nije u redu")
+while True:
+    try:
+        GPIO.setmode(GPIO.BOARD) 
+        GPIO.setup(31, GPIO.OUT)
+        GPIO.setup(33, GPIO.OUT)
+        GPIO.setup(35, GPIO.OUT)
+        GPIO.setup(37, GPIO.OUT)
+        GPIO.cleanup()
+        break
+    except:
+        logger.info("E nesto nije u redu")
 
 
 
