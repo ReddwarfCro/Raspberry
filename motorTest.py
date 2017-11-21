@@ -1,6 +1,14 @@
 import RPi.GPIO as GPIO 
 from datetime import datetime as dt
-import sys, tty, termios, time
+import sys, tty, termios, time, threading
+
+class myTh (threading.Thread):
+	def __init__(self, threadID, name, counter):
+		threading.Thread.__init__(self)
+		self.threadID = threadID
+		self.name = name
+	def run(self):
+		
 
 GPIO.setmode(GPIO.BOARD) 
 GPIO.setup(31, GPIO.OUT)
@@ -13,7 +21,6 @@ state = False
 starttime = dt.now()
 pressed = False
 
-
 def getch():
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
@@ -23,6 +30,12 @@ def getch():
     finally:
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
+
+def run(where, speed):
+	if(where == "r"):
+		RunRight(speed)
+	if(where == "l"):
+		RunLeft(speed)
 
 def LightLED(LedId, state):
     GPIO.output(LedId, state)
