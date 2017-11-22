@@ -7,10 +7,10 @@ class myTh (threading.Thread):
 		threading.Thread.__init__(self)
 		self.threadID = threadID
 		self.name = name
-        	self.where = where
-        	self.speed = speed
+        self.where = where
+        self.speed = speed
 	def run(self):
-        	run(self.where, self.speed, self.name)
+        runWehicle(self.where, self.speed, self.name)
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(31, GPIO.OUT)
@@ -33,15 +33,15 @@ def getch():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
 
-def run(where, speed, threadName):
+def runWehicle(where, speed, threadName):
 	if(where == "r"):
 		RunRight(speed, threadName)
 	if(where == "l"):
 		RunLeft(speed, threadName)
-    	if(where == "f"):
-        	RunForward(speed, threadName)
-    	if(where == "b"):
-        	RunBackward(speed, threadName)
+    if(where == "f"):
+       	RunForward(speed, threadName)
+    if(where == "b"):
+       	RunBackward(speed, threadName)
 
 def LightLED(LedId, state):
     GPIO.output(LedId, state)
