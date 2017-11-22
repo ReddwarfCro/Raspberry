@@ -1,4 +1,4 @@
-import RPi.GPIO as GPIO 
+import RPi.GPIO as GPIO
 from datetime import datetime as dt
 import sys, tty, termios, time, threading
 
@@ -7,13 +7,12 @@ class myTh (threading.Thread):
 		threading.Thread.__init__(self)
 		self.threadID = threadID
 		self.name = name
-        self.where = where
-        self.speed = speed
+        	self.where = where
+        	self.speed = speed
 	def run(self):
-        run(self.where, self.speed)
-		
+        	run(self.where, self.speed, self.name)
 
-GPIO.setmode(GPIO.BOARD) 
+GPIO.setmode(GPIO.BOARD)
 GPIO.setup(31, GPIO.OUT)
 GPIO.setup(33, GPIO.OUT)
 GPIO.setup(35, GPIO.OUT)
@@ -34,15 +33,15 @@ def getch():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
 
-def run(where, speed):
+def run(where, speed, threadName):
 	if(where == "r"):
 		RunRight(speed, threadName)
 	if(where == "l"):
 		RunLeft(speed, threadName)
-    if(where == "f"):
-        RunForward(speed, threadName)
-    if(where == "b"):
-        RunBackward(speed, threadName)
+    	if(where == "f"):
+        	RunForward(speed, threadName)
+    	if(where == "b"):
+        	RunBackward(speed, threadName)
 
 def LightLED(LedId, state):
     GPIO.output(LedId, state)
@@ -121,22 +120,22 @@ while True:
     char = getch()
     if(char == "w"):
         #print("naprijed")
-        thf = myTh(1,"f","f",0.001))
+        thf = myTh(1,"Thread-1","f",0.001)
         thf.start()
 
     if(char == "s"):
         #print("nazad")
-        thb = myTh(2,"b","b",0.001))
+        thb = myTh(2,"Thread-2","b",0.001)
         thb.start()
 
     if(char == "a"):
         #print("desno")
-        thr = myTh(3,"r","r",0.001))
+        thr = myTh(3,"Thread-3","r",0.001)
         thr.start()
 
     if(char == "d"):
         #print("lijevo")
-        thl = myTh(4,"l","l",0.001))
+        thl = myTh(4,"Thread-4","l",0.001)
         thl.start()
 
     if(char == "x"):
