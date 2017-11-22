@@ -36,12 +36,12 @@ def RunForward(speed):
     run = True
     ct = dt.now()
     while run:
-        char = getch()
-        LightLED(33, 0)
+	LightLED(33, 0)
         LightLED(35, 0)
-        if(char != "w" or ((dt.now()-ct).total_seconds() > 0.1)):
+	char = getch()
+	if(char != "w" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
-            break
+	    break
         time.sleep(speed)
         LightLED(33, 1)
         LightLED(35, 1)
@@ -51,8 +51,8 @@ def RunRight(speed):
     run = True
     ct = dt.now()
     while run:
-        char = getch()
         LightLED(33, 0)
+	char = getch()
         if(char != "a" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
             break
@@ -64,8 +64,8 @@ def RunLeft(speed):
     run = True
     ct = dt.now()
     while run:
-        char = getch()
         LightLED(35, 0)
+	char = getch()
         if(char != "d" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
             break
@@ -77,9 +77,9 @@ def RunBackward(speed):
     run = True
     ct = dt.now()
     while run:
-        char = getch()
     	LightLED(31, 0)
     	LightLED(37, 0)
+	char = getch()
         if(char != "s" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
             break
