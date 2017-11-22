@@ -3,11 +3,14 @@ from datetime import datetime as dt
 import sys, tty, termios, time, threading
 
 class myTh (threading.Thread):
-	def __init__(self, threadID, name, counter):
+	def __init__(self, threadID, name, where, speed):
 		threading.Thread.__init__(self)
 		self.threadID = threadID
 		self.name = name
+        self.where = where
+        self.speed = speed
 	def run(self):
+        run(self.where, self.speed)
 		
 
 GPIO.setmode(GPIO.BOARD) 
@@ -33,9 +36,13 @@ def getch():
 
 def run(where, speed):
 	if(where == "r"):
-		RunRight(speed)
+		RunRight(speed, threadName)
 	if(where == "l"):
-		RunLeft(speed)
+		RunLeft(speed, threadName)
+    if(where == "f"):
+        RunForward(speed, threadName)
+    if(where == "b"):
+        RunBackward(speed, threadName)
 
 def LightLED(LedId, state):
     GPIO.output(LedId, state)
@@ -46,7 +53,7 @@ def TurnOff():
     GPIO.output(35,False)
     GPIO.output(37,False)
 
-def RunForward(speed):
+def RunForward(speed, threadName):
     run = True
     ct = dt.now()
     while run:
@@ -55,13 +62,14 @@ def RunForward(speed):
         LightLED(35, 0)
         if(char != "w" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
+            threadName.exit()
             break
         time.sleep(speed)
         LightLED(33, 1)
         LightLED(35, 1)
         time.sleep(speed)
 
-def RunRight(speed):
+def RunRight(speed, threadName):
     run = True
     ct = dt.now()
     while run:
@@ -69,12 +77,13 @@ def RunRight(speed):
         LightLED(33, 0)
         if(char != "a" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
+            threadName.exit()
             break
         time.sleep(speed)
         LightLED(33, 1)
         time.sleep(speed)
 
-def RunLeft(speed):
+def RunLeft(speed, threadName):
     run = True
     ct = dt.now()
     while run:
@@ -82,12 +91,13 @@ def RunLeft(speed):
         LightLED(35, 0)
         if(char != "d" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
+            threadName.exit()
             break
         time.sleep(speed)
         LightLED(35, 1)
         time.sleep(speed)
 
-def RunBackward(speed):
+def RunBackward(speed, threadName):
     run = True
     ct = dt.now()
     while run:
@@ -96,6 +106,7 @@ def RunBackward(speed):
     	LightLED(37, 0)
         if(char != "s" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
+            threadName.exit()
             break
     	time.sleep(speed)
     	LightLED(31, 1)
@@ -110,19 +121,23 @@ while True:
     char = getch()
     if(char == "w"):
         #print("naprijed")
-        RunForward(0.001)
+        thf = myTh(1,"f","f",0.001))
+        thf.start()
 
     if(char == "s"):
         #print("nazad")
-        RunBackward(0.001)  
+        thb = myTh(2,"b","b",0.001))
+        thb.start()
 
     if(char == "a"):
-        #print("lijevo")
-        RunRight(0.001)
+        #print("desno")
+        thr = myTh(3,"r","r",0.001))
+        thr.start()
 
     if(char == "d"):
-        #print("desno")
-        RunLeft(0.001)
+        #print("lijevo")
+        thl = myTh(4,"l","l",0.001))
+        thl.start()
 
     if(char == "x"):
         print("Kraj")
