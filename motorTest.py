@@ -13,6 +13,7 @@ state = False
 starttime = dt.now()
 pressed = False
 
+
 def getch():
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
@@ -23,36 +24,40 @@ def getch():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
 
+
 def LightLED(LedId, state):
     GPIO.output(LedId, state)
 
+
 def TurnOff():
-    GPIO.output(31,False)
-    GPIO.output(33,False)
-    GPIO.output(35,False)
-    GPIO.output(37,False)
+    GPIO.output(31, False)
+    GPIO.output(33, False)
+    GPIO.output(35, False)
+    GPIO.output(37, False)
+
 
 def RunForward(speed):
     run = True
     ct = dt.now()
     while run:
-	LightLED(33, 0)
+        LightLED(33, 0)
         LightLED(35, 0)
-	char = getch()
-	if(char != "w" or ((dt.now()-ct).total_seconds() > 0.1)):
+        char = getch()
+        if(char != "w" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
-	    break
+            break
         time.sleep(speed)
         LightLED(33, 1)
         LightLED(35, 1)
         time.sleep(speed)
+
 
 def RunRight(speed):
     run = True
     ct = dt.now()
     while run:
         LightLED(33, 0)
-	char = getch()
+        char = getch()
         if(char != "a" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
             break
@@ -60,12 +65,13 @@ def RunRight(speed):
         LightLED(33, 1)
         time.sleep(speed)
 
+
 def RunLeft(speed):
     run = True
     ct = dt.now()
     while run:
         LightLED(35, 0)
-	char = getch()
+        char = getch()
         if(char != "d" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
             break
@@ -73,24 +79,26 @@ def RunLeft(speed):
         LightLED(35, 1)
         time.sleep(speed)
 
+
 def RunBackward(speed):
     run = True
     ct = dt.now()
     while run:
-    	LightLED(31, 0)
-    	LightLED(37, 0)
-	char = getch()
+        LightLED(31, 0)
+        LightLED(37, 0)
+        char = getch()
         if(char != "s" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
             break
-    	time.sleep(speed)
-    	LightLED(31, 1)
-    	LightLED(37, 1)
         time.sleep(speed)
+        LightLED(31, 1)
+        LightLED(37, 1)
+        time.sleep(speed)
+
 
 TurnOff()
 
-print "Spreman!"
+print("Spreman!")
 
 while True:
     char = getch()
@@ -114,12 +122,11 @@ while True:
         print("Kraj")
         break
 
-     
+
 try:
     #RunForward(0.0001)
-    #RunBackward(0.0001)  
-    GPIO.cleanup()
-    
-except KeyboardInterrupt:
+    #RunBackward(0.0001)
     GPIO.cleanup()
 
+except KeyboardInterrupt:
+    GPIO.cleanup()
