@@ -13,11 +13,13 @@ hdlr.setFormatter(formatter)
 logger.addHandler(hdlr)
 logger.setLevel(logging.INFO)
 
+
 def get_ip_address(ifname):
-	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	return socket.inet_ntoa(fcntl.ioctl(s.fileno(), 0x8915,
-		struct.pack('256s', ifname[:15])
-	)[20:24])
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    return socket.inet_ntoa(fcntl.ioctl(s.fileno(), 0x8915,
+        struct.pack('256s', ifname[:15])
+    )[20:24])
+
 
 while True:
     try:
@@ -40,8 +42,6 @@ while True:
         break
     except:
         logger.info("E nesto nije u redu")
-
-
 
 logger.info('Masina se rebutala i resetirala GPIO')
 
