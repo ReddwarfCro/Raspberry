@@ -104,19 +104,19 @@ while True:
     char = getch()
     if(char == "w"):
         #print("naprijed")
-        RunForward(0.001)
+        RunForward(0.01)
 
     if(char == "s"):
         #print("nazad")
-        RunBackward(0.001)
+        RunBackward(0.01)
 
     if(char == "d"):
         #print("desno")
-        RunRight(0.001)
+        RunRight(0.01)
 
     if(char == "a"):
         #print("lijevo")
-        RunLeft(0.001)
+        RunLeft(0.01)
 
     if(char == "x"):
         print("Kraj")
