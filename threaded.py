@@ -59,7 +59,6 @@ def runWehicle(threadName, where):
         LightLED(35, 0)
         if (char != "w" or ((dt.now() - ct).total_seconds() > 0.1)):
             run = False
-            threadName.exit()
             break
         time.sleep(0.01)
         LightLED(33, 1)
