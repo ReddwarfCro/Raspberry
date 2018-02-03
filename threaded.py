@@ -41,7 +41,7 @@ def runWehicle(threadName, where):
         run = True
         ct = dt.now()
         while run:
-            print(threadName)
+            print("f")
             char = getch()
             LightLED(33, 0)
             LightLED(35, 0)
@@ -58,7 +58,7 @@ def runWehicle(threadName, where):
         run = True
         ct = dt.now()
         while run:
-            print(threadName)
+            print("r")
             char = getch()
             LightLED(33, 0)
             if (char != "a" or ((dt.now() - ct).total_seconds() > 0.1)):
@@ -73,7 +73,7 @@ def runWehicle(threadName, where):
         run = True
         ct = dt.now()
         while run:
-            print(threadName)
+            print("l")
             char = getch()
             LightLED(35, 0)
             if (char != "d" or ((dt.now() - ct).total_seconds() > 0.1)):
@@ -88,7 +88,7 @@ def runWehicle(threadName, where):
         run = True
         ct = dt.now()
         while run:
-            print(threadName)
+            print("b")
             char = getch()
             LightLED(31, 0)
             LightLED(37, 0)
