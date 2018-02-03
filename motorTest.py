@@ -46,7 +46,6 @@ def RunForward(speed):
         if(char != "w" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
             break
-        time.sleep(speed)
         LightLED(31, 1)
         LightLED(37, 1)
         time.sleep(speed)
@@ -58,10 +57,9 @@ def RunRight(speed):
     while run:
         LightLED(31, 0)
         char = getch()
-        if(char != "a" or ((dt.now()-ct).total_seconds() > 0.1)):
+        if(char != "d" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
             break
-        time.sleep(speed)
         LightLED(31, 1)
         time.sleep(speed)
 
@@ -72,10 +70,9 @@ def RunLeft(speed):
     while run:
         LightLED(37, 0)
         char = getch()
-        if(char != "d" or ((dt.now()-ct).total_seconds() > 0.1)):
+        if(char != "a" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
             break
-        time.sleep(speed)
         LightLED(37, 1)
         time.sleep(speed)
 
@@ -90,7 +87,6 @@ def RunBackward(speed):
         if(char != "s" or ((dt.now()-ct).total_seconds() > 0.1)):
             run = False
             break
-        time.sleep(speed)
         LightLED(33, 1)
         LightLED(35, 1)
         time.sleep(speed)
@@ -104,19 +100,19 @@ while True:
     char = getch()
     if(char == "w"):
         #print("naprijed")
-        RunForward(0.01)
+        RunForward(0.001)
 
     if(char == "s"):
         #print("nazad")
-        RunBackward(0.01)
+        RunBackward(0.001)
 
     if(char == "d"):
         #print("desno")
-        RunRight(0.01)
+        RunRight(0.001)
 
     if(char == "a"):
         #print("lijevo")
-        RunLeft(0.01)
+        RunLeft(0.001)
 
     if(char == "x"):
         print("Kraj")
