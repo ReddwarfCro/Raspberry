@@ -129,22 +129,22 @@ while True:
     char = getch()
     if (char == "w"):
         # print("naprijed")
-        thf = myTh(1, "Thread-1")
+        thf = myTh(1, "Thread-1", "f")
         thf.start()
 
     if (char == "s"):
         # print("nazad")
-        thb = myTh(2, "Thread-2")
+        thb = myTh(2, "Thread-2", "b")
         thb.start()
 
     if (char == "a"):
         # print("desno")
-        thr = myTh(3, "Thread-3")
+        thr = myTh(3, "Thread-3", "r")
         thr.start()
 
     if (char == "d"):
         # print("lijevo")
-        thl = myTh(4, "Thread-4")
+        thl = myTh(4, "Thread-4", "l")
         thl.start()
 
     if (char == "x"):
