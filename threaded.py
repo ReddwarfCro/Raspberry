@@ -4,12 +4,13 @@ import sys, tty, termios, time, threading
 
 
 class myTh(threading.Thread):
-    def __init__(self, threadID, name):
+    def __init__(self, threadID, name, where):
         threading.Thread.__init__(self)
         self.threadID = threadID
         self.name = name
+        self.where = where
     def run(self):
-        runWehicle(self.name)
+        runWehicle(self.name, self.where)
 
 
 GPIO.setmode(GPIO.BOARD)
@@ -35,11 +36,12 @@ def getch():
     return ch
 
 
-def runWehicle(threadName):
+def runWehicle(threadName, where):
     def RunForward(speed, threadName):
         run = True
         ct = dt.now()
         while run:
+            print(threadName)
             char = getch()
             LightLED(33, 0)
             LightLED(35, 0)
@@ -56,6 +58,7 @@ def runWehicle(threadName):
         run = True
         ct = dt.now()
         while run:
+            print(threadName)
             char = getch()
             LightLED(33, 0)
             if (char != "a" or ((dt.now() - ct).total_seconds() > 0.1)):
@@ -70,6 +73,7 @@ def runWehicle(threadName):
         run = True
         ct = dt.now()
         while run:
+            print(threadName)
             char = getch()
             LightLED(35, 0)
             if (char != "d" or ((dt.now() - ct).total_seconds() > 0.1)):
@@ -84,6 +88,7 @@ def runWehicle(threadName):
         run = True
         ct = dt.now()
         while run:
+            print(threadName)
             char = getch()
             LightLED(31, 0)
             LightLED(37, 0)
@@ -95,6 +100,14 @@ def runWehicle(threadName):
             LightLED(31, 1)
             LightLED(37, 1)
             time.sleep(speed)
+    if (where == "r"):
+        RunRight(threadName)
+    if (where == "l"):
+        RunLeft(threadName)
+    if (where == "f"):
+        RunForward(threadName)
+    if (where == "b"):
+        RunBackward(threadName)
 
 
 def LightLED(LedId, state):
