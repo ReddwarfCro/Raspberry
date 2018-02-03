@@ -101,13 +101,13 @@ def runWehicle(threadName, where):
             LightLED(37, 1)
             time.sleep(speed)
     if (where == "r"):
-        RunRight(threadName)
+        RunRight(0.01)
     if (where == "l"):
-        RunLeft(threadName)
+        RunLeft(0.01)
     if (where == "f"):
-        RunForward(threadName)
+        RunForward(0.01)
     if (where == "b"):
-        RunBackward(threadName)
+        RunBackward(0.01)
 
 
 def LightLED(LedId, state):
