@@ -9,6 +9,7 @@ class myTh(threading.Thread):
         self.threadID = threadID
         self.name = name
         self.where = where
+
     def run(self):
         runWehicle(self.name, self.where)
 
@@ -25,18 +26,20 @@ starttime = dt.now()
 pressed = False
 
 
-def getch():
-    fd = sys.stdin.fileno()
-    old_settings = termios.tcgetattr(fd)
-    try:
-        tty.setraw(sys.stdin.fileno())
-        ch = sys.stdin.read(1)
-    finally:
-        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    return ch
-
-
 def runWehicle(threadName, where):
+    def getch():
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        return ch
+
+    def LightLED(LedId, state):
+        GPIO.output(LedId, state)
+
     run = True
     ct = dt.now()
     while run:
@@ -51,10 +54,6 @@ def runWehicle(threadName, where):
         LightLED(33, 1)
         LightLED(35, 1)
         time.sleep(0.01)
-
-
-def LightLED(LedId, state):
-    GPIO.output(LedId, state)
 
 
 def TurnOff():
