@@ -37,77 +37,20 @@ def getch():
 
 
 def runWehicle(threadName, where):
-    def RunForward(speed):
-        run = True
-        ct = dt.now()
-        while run:
-            print("f")
-            char = getch()
-            LightLED(33, 0)
-            LightLED(35, 0)
-            if (char != "w" or ((dt.now() - ct).total_seconds() > 0.1)):
-                run = False
-                threadName.exit()
-                break
-            time.sleep(speed)
-            LightLED(33, 1)
-            LightLED(35, 1)
-            time.sleep(speed)
-
-    def RunRight(speed):
-        run = True
-        ct = dt.now()
-        while run:
-            print("r")
-            char = getch()
-            LightLED(33, 0)
-            if (char != "a" or ((dt.now() - ct).total_seconds() > 0.1)):
-                run = False
-                threadName.exit()
-                break
-            time.sleep(speed)
-            LightLED(33, 1)
-            time.sleep(speed)
-
-    def RunLeft(speed):
-        run = True
-        ct = dt.now()
-        while run:
-            print("l")
-            char = getch()
-            LightLED(35, 0)
-            if (char != "d" or ((dt.now() - ct).total_seconds() > 0.1)):
-                run = False
-                threadName.exit()
-                break
-            time.sleep(speed)
-            LightLED(35, 1)
-            time.sleep(speed)
-
-    def RunBackward(speed):
-        run = True
-        ct = dt.now()
-        while run:
-            print("b")
-            char = getch()
-            LightLED(31, 0)
-            LightLED(37, 0)
-            if (char != "s" or ((dt.now() - ct).total_seconds() > 0.1)):
-                run = False
-                threadName.exit()
-                break
-            time.sleep(speed)
-            LightLED(31, 1)
-            LightLED(37, 1)
-            time.sleep(speed)
-    if (where == "r"):
-        RunRight(0.01)
-    if (where == "l"):
-        RunLeft(0.01)
-    if (where == "f"):
-        RunForward(0.01)
-    if (where == "b"):
-        RunBackward(0.01)
+    run = True
+    ct = dt.now()
+    while run:
+        char = getch()
+        LightLED(33, 0)
+        LightLED(35, 0)
+        if (char != "w" or ((dt.now() - ct).total_seconds() > 0.1)):
+            run = False
+            threadName.exit()
+            break
+        time.sleep(0.01)
+        LightLED(33, 1)
+        LightLED(35, 1)
+        time.sleep(0.01)
 
 
 def LightLED(LedId, state):
