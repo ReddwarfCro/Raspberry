@@ -37,7 +37,7 @@ def getch():
 
 
 def runWehicle(threadName, where):
-    def RunForward(speed, threadName):
+    def RunForward(speed):
         run = True
         ct = dt.now()
         while run:
@@ -54,7 +54,7 @@ def runWehicle(threadName, where):
             LightLED(35, 1)
             time.sleep(speed)
 
-    def RunRight(speed, threadName):
+    def RunRight(speed):
         run = True
         ct = dt.now()
         while run:
@@ -69,7 +69,7 @@ def runWehicle(threadName, where):
             LightLED(33, 1)
             time.sleep(speed)
 
-    def RunLeft(speed, threadName):
+    def RunLeft(speed):
         run = True
         ct = dt.now()
         while run:
@@ -84,7 +84,7 @@ def runWehicle(threadName, where):
             LightLED(35, 1)
             time.sleep(speed)
 
-    def RunBackward(speed, threadName):
+    def RunBackward(speed):
         run = True
         ct = dt.now()
         while run:
