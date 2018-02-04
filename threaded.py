@@ -99,6 +99,7 @@ def RunForward(speed):
 
         char = getch()
         if(char != "w"):
+            TurnOff()
             run = False
             break
 
