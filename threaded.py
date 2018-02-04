@@ -52,19 +52,29 @@ class myThread (threading.Thread):
          char = getch()
          if (char == "w"):
             # print("naprijed")
-            RunForward(0.01)
+            RunForward(self.speed)
 
          if (char == "s"):
             # print("nazad")
-            RunBackward(0.01)
+            RunBackward(self.speed)
 
          if (char == "d"):
             # print("desno")
-            RunRight(0.01)
+            RunRight(self.speed)
 
          if (char == "a"):
             # print("lijevo")
-            RunLeft(0.01)
+            RunLeft(self.speed)
+
+         if (char == "r"):
+            speed = speed - 0.001
+            if (speed < 0):
+                speed = 0
+            print (speed)
+
+         if (char == "f"):
+            speed = speed + 0.001
+            print (speed)
 
          if (char == "x"):
             print("Kraj")
