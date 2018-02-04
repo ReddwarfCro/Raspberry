@@ -46,7 +46,7 @@ class myThread (threading.Thread):
    def run(self):
       print ("Starting ")
       print("Spreman!")
-      speed = 0.002
+      speed = 0.001
 
       while True:
          char = getch()
