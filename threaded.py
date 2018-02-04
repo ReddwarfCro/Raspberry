@@ -101,6 +101,7 @@ def RunForward(speed):
         if char != "w":
             LightLED(31, 0)
             LightLED(37, 0)
+            print("out")
             break
 
 
