@@ -85,9 +85,8 @@ class myThread (threading.Thread):
 
 
 def RunForward(speed):
-    run = True
     ct = dt.now()
-    while run:
+    while True:
         if (dt.now() - ct).total_seconds() >= 0.002:
             ct = dt.now()
             LightLED(31, 1)
@@ -98,9 +97,10 @@ def RunForward(speed):
             LightLED(37, 0)
 
         char = getch()
-        if(char != "w"):
-            TurnOff()
-            run = False
+        print(char)
+        if char != "w":
+            LightLED(31, 0)
+            LightLED(37, 0)
             break
 
 
