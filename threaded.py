@@ -91,10 +91,12 @@ def RunForward(speed):
             ct = dt.now()
             LightLED(31, 1)
             LightLED(37, 1)
+            print("pali")
 
         if (dt.now() - ct).total_seconds() >= speed:
             LightLED(31, 0)
             LightLED(37, 0)
+            print("gasi")
 
         char = getch()
         print(char)
