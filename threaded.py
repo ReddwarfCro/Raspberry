@@ -12,7 +12,6 @@ initial = True
 state = False
 starttime = dt.now()
 pressed = False
-speed = 0.01
 
 
 def getch():
@@ -38,33 +37,34 @@ def TurnOff():
 
 
 class myThread (threading.Thread):
-   def __init__(self, threadID, name, counter, speed):
+   def __init__(self, threadID, name, counter):
       threading.Thread.__init__(self)
       self.threadID = threadID
       self.name = name
       self.counter = counter
-      self.speed = speed
+
    def run(self):
-      print ("Starting " + self.name)
+      print ("Starting ")
       print("Spreman!")
+      speed = 0.01
 
       while True:
          char = getch()
          if (char == "w"):
             # print("naprijed")
-            RunForward(self.speed)
+            RunForward(speed)
 
          if (char == "s"):
             # print("nazad")
-            RunBackward(self.speed)
+            RunBackward(speed)
 
          if (char == "d"):
             # print("desno")
-            RunRight(self.speed)
+            RunRight(speed)
 
          if (char == "a"):
             # print("lijevo")
-            RunLeft(self.speed)
+            RunLeft(speed)
 
          if (char == "r"):
             speed = speed - 0.001
@@ -143,7 +143,7 @@ def RunBackward(speed):
 TurnOff()
 
 # Create new threads
-thread1 = myThread(1, "Thread-1", 1, speed)
+thread1 = myThread(1, "Thread-1", 1)
 
 # Start new Threads
 thread1.start()
