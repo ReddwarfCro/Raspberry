@@ -81,6 +81,9 @@ class myThread (threading.Thread):
          if (char == "x"):
             print("Kraj")
             break
+
+         TurnOff()
+
       print ("Exiting " + self.name)
 
 
@@ -91,19 +94,13 @@ def RunForward(speed):
             ct = dt.now()
             LightLED(31, 1)
             LightLED(37, 1)
-            print("pali")
 
         if (dt.now() - ct).total_seconds() >= speed:
             LightLED(31, 0)
             LightLED(37, 0)
-            print("gasi")
 
         char = getch()
-        print(char)
         if char != "w":
-            LightLED(31, 0)
-            LightLED(37, 0)
-            print("out")
             break
 
 
