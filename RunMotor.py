@@ -13,11 +13,11 @@ state = False
 starttime = dt.now()
 pressed = False
 
-forwardLeft = GPIO.PWM(31, 0.5)
-reverseLeft = GPIO.PWM(33, 0.5)
+forwardLeft = GPIO.PWM(31, 100)
+reverseLeft = GPIO.PWM(33, 100)
 
-forwardRight = GPIO.PWM(37, 0.5)
-reverseRight = GPIO.PWM(35, 0.5)
+forwardRight = GPIO.PWM(37, 100)
+reverseRight = GPIO.PWM(35, 100)
 
 
 def getch():
@@ -44,6 +44,8 @@ print("Spreman!")
 while True:
     char = getch()
     if(char == "w"):
+        forwardRight.start(50)
+        forwardLeft.start(50)
         forwardLeft.ChangeDutyCycle(50)
         forwardRight.ChangeDutyCycle(50)
 
