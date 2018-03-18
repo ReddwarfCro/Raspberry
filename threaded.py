@@ -46,7 +46,7 @@ class myThread (threading.Thread):
    def run(self):
       print ("Starting ")
       print("Spreman!")
-      speed = 0.001
+      speed = 0.01
 
       while True:
          char = getch()
@@ -67,14 +67,14 @@ class myThread (threading.Thread):
             RunLeft(speed)
 
          if (char == "r"):
-            speed = speed - 0.0001
-            if (speed < 0.0005):
-                speed = 0.0005
+            speed = speed - 0.001
+            if (speed < 0.005):
+                speed = 0.005
             print (speed)
 
          if (char == "f"):
-            speed = speed + 0.0001
-            if (speed > 0.002):
+            speed = speed + 0.001
+            if (speed > 0.02):
                 speed = 0.002
             print (speed)
 
@@ -90,7 +90,7 @@ class myThread (threading.Thread):
 def RunForward(speed):
     ct = dt.now()
     while True:
-        if (dt.now() - ct).total_seconds() >= 0.002:
+        if (dt.now() - ct).total_seconds() >= 0.02:
             ct = dt.now()
             LightLED(31, 1)
             LightLED(37, 1)
