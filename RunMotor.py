@@ -12,12 +12,13 @@ initial = True
 state = False
 starttime = dt.now()
 pressed = False
+speed = 50
 
-forwardLeft = GPIO.PWM(31, 100)
-reverseLeft = GPIO.PWM(33, 100)
+forwardLeft = GPIO.PWM(31, 50)
+reverseLeft = GPIO.PWM(33, 50)
 
-forwardRight = GPIO.PWM(37, 100)
-reverseRight = GPIO.PWM(35, 100)
+forwardRight = GPIO.PWM(37, 50)
+reverseRight = GPIO.PWM(35, 50)
 
 
 def getch():
@@ -44,26 +45,42 @@ print("Spreman!")
 while True:
     char = getch()
     if(char == "w"):
-        forwardRight.start(50)
-        forwardLeft.start(50)
-        forwardLeft.ChangeDutyCycle(50)
-        forwardRight.ChangeDutyCycle(50)
+        forwardRight.start(speed)
+        forwardLeft.start(speed)
+        forwardLeft.ChangeDutyCycle(speed)
+        forwardRight.ChangeDutyCycle(speed)
 
-    #if(char == "s"):
-        #print("nazad")
-        #RunBackward(0.01)
+    if(char == "s"):
+        reverseRight.start(speed)
+        reverseLeft.start(speed)
+        reverseLeft.ChangeDutyCycle(speed)
+        reverseRight.ChangeDutyCycle(speed)
 
-    #if(char == "d"):
-        #print("desno")
-        #RunRight(0.01)
+    if(char == "d"):
+        forwardRight.start(speed)
+        forwardRight.ChangeDutyCycle(speed)
 
-    #if(char == "a"):
-        #print("lijevo")
-        #RunLeft(0.01)
+    if(char == "a"):
+        forwardLeft.start(speed)
+        forwardLeft.ChangeDutyCycle(speed)
+
+    if (char == "r"):
+        speed = speed - 5
+        if (speed < 20):
+            speed = 20
+        print(speed)
+
+    if (char == "f"):
+        speed = speed + 5
+        if (speed > 100):
+            speed = 100
+        print(speed)
 
     if(char == "x"):
         TurnOff()
         break
+
+    TurnOff()
 
 
 try:
