@@ -1,7 +1,6 @@
 import RPi.GPIO as GPIO
 from datetime import datetime as dt
-import sys, tty, termios, time, pygame
-
+import sys, tty, termios, time
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(31, GPIO.OUT)
@@ -14,9 +13,6 @@ state = False
 starttime = dt.now()
 pressed = False
 speed = 50
-
-pygame.init()
-pygame.display.set_mode((100,100))
 
 forwardLeft = GPIO.PWM(31, 50)
 reverseLeft = GPIO.PWM(33, 50)
@@ -34,7 +30,6 @@ def getch():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
 
-
 def TurnOff():
     forwardLeft.stop()
     reverseLeft.stop()
@@ -46,50 +41,38 @@ TurnOff()
 print("Spreman!")
 
 while True:
-    for event in pygame.event.get():
-	if event.type == pygame.KEYDOWN and event.key == pygame.K_a:
-	    print("A")
-	elif event.type == pygame.KEYUP and event.key == pygame.K_a:
-	    print("digo")
-	    break
-
-while True:
     char = getch()
     if(char == "w"):
         forwardRight.start(speed)
         forwardLeft.start(speed)
         forwardLeft.ChangeDutyCycle(speed)
         forwardRight.ChangeDutyCycle(speed)
-
-    if(char == "s"):
+    elif(char == "s"):
         reverseRight.start(speed)
         reverseLeft.start(speed)
         reverseLeft.ChangeDutyCycle(speed)
         reverseRight.ChangeDutyCycle(speed)
-
-    if(char == "d"):
+    elif(char == "d"):
         forwardRight.start(speed)
         forwardRight.ChangeDutyCycle(speed)
-
-    if(char == "a"):
+    elif(char == "a"):
         forwardLeft.start(speed)
         forwardLeft.ChangeDutyCycle(speed)
-
-    if (char == "r"):
+    elif (char == "f"):
         speed = speed - 5
         if (speed < 20):
             speed = 20
         print(speed)
-
-    if (char == "f"):
+    elif (char == "r"):
         speed = speed + 5
         if (speed > 100):
             speed = 100
         print(speed)
-
-    if(char == "x"):
+    elif(char == "x"):
         TurnOff()
         break
+    else:
+	TurnOff()
 
 
 try:
