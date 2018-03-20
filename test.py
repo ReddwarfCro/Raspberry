@@ -1,130 +1,55 @@
+# Libraries
 import RPi.GPIO as GPIO
-from datetime import datetime as dt
-import sys, tty, termios, time
+import time
 
+# GPIO Mode (BOARD / BCM)
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(31, GPIO.OUT)
-GPIO.setup(33, GPIO.OUT)
-GPIO.setup(35, GPIO.OUT)
-GPIO.setup(37, GPIO.OUT)
 
-initial = True
-state = False
-starttime = dt.now()
-pressed = False
+# set GPIO Pins
+GPIO_TRIGGER = 18
+GPIO_ECHO = 24
+
+# set GPIO direction (IN / OUT)
+GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
+GPIO.setup(GPIO_ECHO, GPIO.IN)
 
 
-def getch():
-    fd = sys.stdin.fileno()
-    old_settings = termios.tcgetattr(fd)
+def distance():
+    # set Trigger to HIGH
+    GPIO.output(GPIO_TRIGGER, True)
+
+    # set Trigger after 0.01ms to LOW
+    time.sleep(0.00001)
+    GPIO.output(GPIO_TRIGGER, False)
+
+    StartTime = time.time()
+    StopTime = time.time()
+
+    # save StartTime
+    while GPIO.input(GPIO_ECHO) == 0:
+        StartTime = time.time()
+
+    # save time of arrival
+    while GPIO.input(GPIO_ECHO) == 1:
+        StopTime = time.time()
+
+    # time difference between start and arrival
+    TimeElapsed = StopTime - StartTime
+    # multiply with the sonic speed (34300 cm/s)
+    # and divide by 2, because there and back
+    distance = (TimeElapsed * 34300) / 2
+
+    return distance
+
+
+if __name__ == '__main__':
     try:
-        tty.setraw(sys.stdin.fileno())
-        ch = sys.stdin.read(1)
-    finally:
-        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    return ch
+        while True:
+            dist = distance()
+            print("Measured Distance = %.1f cm" % dist)
+            time.sleep(1)
 
-
-def LightLED(LedId, state):
-    GPIO.output(LedId, state)
-
-
-def TurnOff():
-    GPIO.output(31, False)
-    GPIO.output(33, False)
-    GPIO.output(35, False)
-    GPIO.output(37, False)
-
-
-def RunForward(speed):
-    run = True
-    ct = dt.now()
-    while run:
-        LightLED(33, 0)
-        LightLED(35, 0)
-        char = getch()
-        if(char != "w" or ((dt.now()-ct).total_seconds() > 0.1)):
-            run = False
-            break
-        time.sleep(speed)
-        LightLED(33, 1)
-        LightLED(35, 1)
-        time.sleep(speed)
-
-
-def RunRight(speed):
-    run = True
-    ct = dt.now()
-    while run:
-        LightLED(33, 0)
-        char = getch()
-        if(char != "a" or ((dt.now()-ct).total_seconds() > 0.1)):
-            run = False
-            break
-        time.sleep(speed)
-        LightLED(33, 1)
-        time.sleep(speed)
-
-
-def RunLeft(speed):
-    run = True
-    ct = dt.now()
-    while run:
-        LightLED(35, 0)
-        char = getch()
-        if(char != "d" or ((dt.now()-ct).total_seconds() > 0.1)):
-            run = False
-            break
-        time.sleep(speed)
-        LightLED(35, 1)
-        time.sleep(speed)
-
-
-def RunBackward(speed):
-    run = True
-    ct = dt.now()
-    while run:
-        LightLED(31, 0)
-        LightLED(37, 0)
-        char = getch()
-        if(char != "s" or ((dt.now()-ct).total_seconds() > 0.1)):
-            run = False
-            break
-        time.sleep(speed)
-        LightLED(31, 1)
-        LightLED(37, 1)
-        time.sleep(speed)
-
-
-TurnOff()
-
-print("Spreman!")
-
-while True:
-    char = getch()
-    if(char == "w"):
-        #print("naprijed")
-        RunForward(0.001)
-
-    if(char == "s"):
-        #print("nazad")
-        RunBackward(0.001)
-
-    if(char == "a"):
-        #print("desno")
-        RunRight(0.001)
-
-    if(char == "d"):
-        #print("lijevo")
-        RunLeft(0.001)
-
-    if(char == "x"):
-        print("Kraj")
-        break
-
-
-try:
-    GPIO.cleanup()
-
-except KeyboardInterrupt:
-    GPIO.cleanup()
+        # Reset by pressing CTRL + C
+    except KeyboardInterrupt:
+        print("Measurement stopped by User")
+        GPIO.cleanup()
