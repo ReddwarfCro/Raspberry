@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 from datetime import datetime as dt
-import sys, tty, termios, time
+import sys, tty, termios, time, pygame
+
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(31, GPIO.OUT)
@@ -14,12 +15,14 @@ starttime = dt.now()
 pressed = False
 speed = 50
 
+pygame.init()
+pygame.display.set_mode((100,100))
+
 forwardLeft = GPIO.PWM(31, 50)
 reverseLeft = GPIO.PWM(33, 50)
 
 forwardRight = GPIO.PWM(37, 50)
 reverseRight = GPIO.PWM(35, 50)
-
 
 def getch():
     fd = sys.stdin.fileno()
@@ -41,6 +44,14 @@ def TurnOff():
 TurnOff()
 
 print("Spreman!")
+
+while True:
+    for event in pygame.event.get():
+	if event.type == pygame.KEYDOWN and event.key == pygame.K_a:
+	    print("A")
+	elif event.type == pygame.KEYUP and event.key == pygame.K_a:
+	    print("digo")
+	    break
 
 while True:
     char = getch()
@@ -79,8 +90,6 @@ while True:
     if(char == "x"):
         TurnOff()
         break
-
-    TurnOff()
 
 
 try:
