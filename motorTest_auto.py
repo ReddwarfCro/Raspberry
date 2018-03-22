@@ -9,8 +9,8 @@ GPIO.setup(35, GPIO.OUT)
 GPIO.setup(37, GPIO.OUT)
 
 # set GPIO Pins
-GPIO_TRIGGER = 18
-GPIO_ECHO = 24
+GPIO_TRIGGER = 12
+GPIO_ECHO = 18
 
 # set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
@@ -20,7 +20,8 @@ initial = True
 state = False
 starttime = dt.now()
 pressed = False
-speed = 40
+speed = 30
+lastDistance = 0
 
 forwardLeft = GPIO.PWM(31, 50)
 reverseLeft = GPIO.PWM(33, 50)
@@ -104,13 +105,17 @@ print("Spreman!")
 try:
     while True:
         dist = distance()
-        if dist > 40:
+        if dist > 50:
+            dist = lastDistance
+        if dist < 10:
+            TurnOff()
+        else:
             forwardRight.start(speed)
             forwardLeft.start(speed)
             forwardLeft.ChangeDutyCycle(speed)
             forwardRight.ChangeDutyCycle(speed)
-        elif dist < 10:
-            TurnOff()
+        time.sleep(0.1)
+        lastDistance = dist
 
     GPIO.cleanup()
 
