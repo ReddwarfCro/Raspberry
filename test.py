@@ -46,7 +46,8 @@ if __name__ == '__main__':
     try:
         while True:
             dist = distance()
-            print("Measured Distance = %.1f cm" % dist)
+            if dist < 40:
+                print("Measured Distance = %.1f cm" % dist)
             time.sleep(0.1)
 
         # Reset by pressing CTRL + C
