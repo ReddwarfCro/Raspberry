@@ -7,20 +7,17 @@ GPIO.setup(03, GPIO.OUT)
 
 pwm=GPIO.PWM(03, 50)
 
-pwm.start(0)
+pwm.start(7.5)
 
-def SetAngle(angle):
-	duty = angle / 18 + 2
-	GPIO.output(03, True)
-	pwm.ChangeDutyCycle(duty)
-	sleep(1)
-	GPIO.output(03, False)
-	pwm.ChangeDutyCycle(0)
+try:
+	while True:
+		pwm.ChangeDutyCycle(7.5)
+		sleep(1)
+		pwm.ChangeDutyCycle(12.5)
+		sleep(1)
+		pwm.ChangeDutyCycle(2.5)
+		sleep(1)
 
-for angle in range(0, 180):
-	SetAngle(angle)
-	sleep(2)
-
-
-pwm.stop()
-GPIO.cleanup()
+except KeyboardInterrupt:
+	pwm.stop()
+	GPIO.cleanup()
