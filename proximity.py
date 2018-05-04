@@ -13,10 +13,9 @@ input = GPIO.input(rightPin)
 input2 = GPIO.input(leftPin)
 
 while True:
-	if GPIO.input(rightPin) == False:
-		print("right")
+    if GPIO.input(rightPin) == False:
+        print("right")
     elif GPIO.input(leftPin) == False:
         print("left")
-
-	time.sleep(0.1)
+    time.sleep(0.1)
 
