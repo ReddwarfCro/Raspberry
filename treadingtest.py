@@ -56,15 +56,15 @@ def sensor(threadName):
    global exitFlag
    global stop
    while True:
-       if GPIO.input(rightPin) == False:
-           exitFlag = 1
-           print("righ")
+       if stop:
+           GPIO.cleanup()
+           return
        elif GPIO.input(leftPin) == False:
            exitFlag = 1
            print("left")
-       elif stop:
-           GPIO.cleanup()
-           return
+       elif GPIO.input(rightPin) == False:
+           exitFlag = 1
+           print("righ")
        else:
            exitFlag = 0
        print("thread")
