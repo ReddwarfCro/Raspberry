@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+from time import sleep
 
 
 GPIO.setmode(GPIO.BOARD)
@@ -43,33 +44,33 @@ def distance():
     return distance
 
 pwm.start(7.5)
-wait = 0.5
+wait = 1 
 
 try:
 	while True:
 		pwm.ChangeDutyCycle(7.5)
-        print(distance())
+        	print(distance())
 		sleep(wait)
 		pwm.ChangeDutyCycle(9.1)
-        print(distance())
+        	print(distance())
 		sleep(wait)
 		pwm.ChangeDutyCycle(10.7)
-        print(distance())
+        	print(distance())
 		sleep(wait)
 		pwm.ChangeDutyCycle(12.5)
-        print(distance())
+        	print(distance())
 		sleep(wait)
 		pwm.ChangeDutyCycle(7.5)
-        print(distance())
+        	print(distance())
 		sleep(wait)
 		pwm.ChangeDutyCycle(5.9)
-        print(distance())
+        	print(distance())
 		sleep(wait)
 		pwm.ChangeDutyCycle(4.3)
-        print(distance())
+        	print(distance())
 		sleep(wait)
 		pwm.ChangeDutyCycle(2.5)
-        print(distance())
+        	print(distance())
 		sleep(wait)
 
 except KeyboardInterrupt:
