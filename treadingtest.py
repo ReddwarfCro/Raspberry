@@ -87,6 +87,7 @@ try:
             forwardRight.ChangeDutyCycle(speed)
         time.sleep(0.1)
         print("main")
+        print(exitFlag)
 
 except KeyboardInterrupt:
     GPIO.cleanup()
