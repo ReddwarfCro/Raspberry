@@ -89,6 +89,7 @@ try:
                 reverseLeft.ChangeDutyCycle(speed)
                 time.sleep(0.2)
                 counter -= 1
+            TurnOff()
         else:
             forwardRight.start(speed)
             forwardLeft.start(speed)
