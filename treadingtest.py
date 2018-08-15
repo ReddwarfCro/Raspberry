@@ -82,7 +82,7 @@ try:
     while True:
         if exitFlag:
             TurnOff()
-            while counter > 0:
+            while counter:
                 reverseRight.start(speed)
                 reverseLeft.start(speed)
                 reverseRight.ChangeDutyCycle(speed)
@@ -94,6 +94,7 @@ try:
             forwardLeft.start(speed)
             forwardRight.ChangeDutyCycle(speed)
             forwardLeft.ChangeDutyCycle(speed)
+            counter = 4
         time.sleep(0.1)
         print("main")
         print(exitFlag)
