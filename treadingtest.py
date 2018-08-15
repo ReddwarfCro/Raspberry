@@ -24,7 +24,7 @@ GPIO.setup(leftPin, GPIO.IN)
 
 exitFlag = 0
 stop = 0
-speed = 30
+speed = 50
 
 forwardLeft = GPIO.PWM(31, 50)
 reverseLeft = GPIO.PWM(33, 50)
@@ -63,6 +63,7 @@ def sensor(threadName):
            exitFlag = 1
            print("left")
        elif stop:
+           GPIO.cleanup()
            return
        else:
            exitFlag = 0
