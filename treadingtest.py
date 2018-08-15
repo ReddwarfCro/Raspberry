@@ -26,6 +26,8 @@ exitFlag = 0
 stop = 0
 speed = 80
 
+counter = 4
+
 forwardLeft = GPIO.PWM(31, 50)
 reverseLeft = GPIO.PWM(33, 50)
 
@@ -80,11 +82,18 @@ try:
     while True:
         if exitFlag:
             TurnOff()
+            while counter > 0:
+                reverseRight.start(speed)
+                reverseLeft.start(speed)
+                reverseRight.ChangeDutyCycle(speed)
+                reverseLeft.ChangeDutyCycle(speed)
+                time.sleep(1)
+                counter -= 1
         else:
             forwardRight.start(speed)
             forwardLeft.start(speed)
-            forwardLeft.ChangeDutyCycle(speed)
             forwardRight.ChangeDutyCycle(speed)
+            forwardLeft.ChangeDutyCycle(speed)
         time.sleep(0.1)
         print("main")
         print(exitFlag)
