@@ -44,11 +44,10 @@ print("Spreman!")
 
 
 class myThread (threading.Thread):
-   def __init__(self, threadID, name, delay):
+   def __init__(self, threadID, name):
       threading.Thread.__init__(self)
       self.threadID = threadID
       self.name = name
-      self.delay = delay
    def run(self):
       sensor(self.name)
 
@@ -59,17 +58,20 @@ def sensor(threadName):
    while True:
        if GPIO.input(rightPin) == False:
            exitFlag = 1
+           print("righ")
        elif GPIO.input(leftPin) == False:
            exitFlag = 1
+           print("left")
        elif stop:
            return
        else:
            exitFlag = 0
+       print("thread")
+       time.sleep(0.1)
 
 
 # Create new threads
-thread1 = myThread(1, "Thread-1", 1)
-thread2 = myThread(2, "Thread-2", 2)
+thread1 = myThread(1, "Thread-1")
 
 # Start new Threads
 thread1.start()
@@ -84,6 +86,7 @@ try:
             forwardLeft.ChangeDutyCycle(speed)
             forwardRight.ChangeDutyCycle(speed)
         time.sleep(0.1)
+        print("main")
 
 except KeyboardInterrupt:
     GPIO.cleanup()
